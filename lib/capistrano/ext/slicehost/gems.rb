@@ -8,6 +8,11 @@ namespace :gems do
   task :update, :roles => :app do
     sudo "gem update"
   end
+  
+  desc "Update gem system on remote server"
+  task :update_system, :roles => :app do
+    sudo "gem update --system"
+  end
 
   desc "Install a gem on the remote server"
   task :install, :roles => :app do
