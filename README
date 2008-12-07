@@ -1,15 +1,13 @@
 Slicehost Recipes
 =================
 
-Slicehost Capistrano recipes for configuring and managing your slice.
-
+Slicehost Capistrano recipes for configuring and managing your slice. Require Capistrano >2.5.0
 
 Example
 =======
 
 The recipes are designed to work stand alone apart from the standard set of Capistrano deploy recipes.
 
-  cap -f slicehost.rb
+  require 'capistrano/ext/slicehost' in your deploy.rb file
 
-
-Copyright (c) 2007 Joshua Peek, released under the MIT license
+Copyright (c) 2008 Joshua Peek, updated by Oleg Zhurbiy, released under the MIT license
