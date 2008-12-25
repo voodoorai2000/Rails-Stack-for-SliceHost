@@ -26,7 +26,7 @@ namespace :ruby do
   desc "Install Phusion Passenger"
   task :install_passenger, :roles => :app do
     sudo "apt-get install apache2-mpm-prefork"
-    sudo "/opt/#{ruby_enterprise_version}/bin/ruby /opt/#{ruby_enterprise_version}/bin/gem install install passenger"
+    sudo "/opt/#{ruby_enterprise_version}/bin/ruby /opt/#{ruby_enterprise_version}/bin/gem install passenger"
     sudo "/opt/#{ruby_enterprise_version}/bin/ruby /opt/#{ruby_enterprise_version}/bin/passenger-install-apache2-module"
 
     put render("passenger.load", binding), "/home/#{user}/passenger.load"
