@@ -17,7 +17,7 @@ namespace :gems do
   desc "Install a gem on the remote server"
   task :install, :roles => :app do
     name = Capistrano::CLI.ui.ask("Which gem should we install: ")
-    sudo "gem install #{name}"
+    sudo "gem install #{name} --no-rdoc --no-ri"
   end
 
   desc "Uninstall a gem on the remote server"
