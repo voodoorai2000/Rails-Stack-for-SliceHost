@@ -1,4 +1,4 @@
-ssh_options = { :keys => [File.expand_path("~/.ssh/id_dsa")], :port => 22 }
+ssh_options = { :keys => [File.expand_path("~/.ssh/id_dsa"),File.expand_path("~/.ssh/id_rsa") ], :port => 22 }
 
 namespace :ssh do
   desc <<-DESC
@@ -32,7 +32,13 @@ namespace :ssh do
     run "chown -R #{user}:#{user} ~/.ssh"
     run "chmod 700 ~/.ssh"
 
-    authorized_keys = ssh_options[:keys].collect { |key| File.read("#{key}.pub") }.join("\n")
+    authorized_keys = ssh_options[:keys].collect { |key| 
+			begin
+				File.read("#{key}.pub")
+			rescue Errno::ENOENT => e
+			end
+			
+	  }.join("\n")
     put authorized_keys, "./.ssh/authorized_keys", :mode => 0600
   end
 

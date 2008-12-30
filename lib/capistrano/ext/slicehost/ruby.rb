@@ -1,6 +1,6 @@
 # TODO: Automatically determine these values
 set :ruby_enterprise_version, "ruby-enterprise-1.8.6-20081215"
-set :passenger_version, "2.0.3"
+set :passenger_version, "2.0.6"
 
 namespace :ruby do
 
@@ -28,7 +28,15 @@ namespace :ruby do
   task :install_passenger, :roles => :app do
     sudo "apt-get install apache2-mpm-prefork"
     sudo "/opt/#{ruby_enterprise_version}/bin/ruby /opt/#{ruby_enterprise_version}/bin/gem install passenger rake --no-rdoc --no-ri"
-    sudo "/opt/#{ruby_enterprise_version}/bin/ruby /opt/#{ruby_enterprise_version}/bin/passenger-install-apache2-module"
+    sudo "PATH='/opt/#{ruby_enterprise_version}/bin/':\$PATH /opt/#{ruby_enterprise_version}/bin/ruby /opt/#{ruby_enterprise_version}/bin/passenger-install-apache2-module", :pty => true do |ch, stream, data|
+      if data =~ /Press\sEnter\sto\scontinue/ || data =~ /Press\sENTER\sto\scontinue/
+        # prompt, and then send the response to the remote process
+        ch.send_data(Capistrano::CLI.password_prompt("Press enter to continue: ") + "\n")
+      else
+        # use the default handler for all other text
+        Capistrano::Configuration.default_io_proc.call(ch, stream, data)
+       end
+    end
 
     put render("passenger.load", binding), "/home/#{user}/passenger.load"
     put render("passenger.config", binding), "/home/#{user}/passenger.config"
