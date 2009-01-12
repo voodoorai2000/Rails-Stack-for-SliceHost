@@ -28,7 +28,7 @@ namespace :ruby do
   desc "Install Phusion Passenger"
   task :install_passenger, :roles => :app do
     sudo "apt-get install apache2-mpm-prefork"
-    sudo "apt-get install apache2-prefork-dev"
+    sudo "aptitude install -y apache2-prefork-dev"
     sudo "/opt/#{ruby_enterprise_version}/bin/ruby /opt/#{ruby_enterprise_version}/bin/gem install passenger rake --no-rdoc --no-ri"
     sudo "PATH='/opt/#{ruby_enterprise_version}/bin/':\$PATH /opt/#{ruby_enterprise_version}/bin/ruby /opt/#{ruby_enterprise_version}/bin/passenger-install-apache2-module", :pty => true do |ch, stream, data|
 
