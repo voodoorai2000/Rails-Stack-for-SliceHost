@@ -25,7 +25,7 @@ namespace :ruby do
   desc "Install Ruby Enterpise Edition"
   task :install_enterprise, :roles => :app do
     sudo "aptitude install -y libssl-dev"
-    sudo "apt-get install libreadline5-dev"
+    sudo "apt-get install -y libreadline5-dev"
     run "test ! -d /opt/#{ruby_enterprise_version}"
     run "wget -q #{ruby_enterprise_url}"
     run "tar xzvf #{ruby_enterprise_version}.tar.gz"
