@@ -25,7 +25,7 @@ Install Apache
 	cap apache:install
 
 Install ruby 1.8
-	cap ruby:isetup_18
+	cap ruby:setup_18
 
 Install ruby enterprise
 	cap ruby:install_enterprise
