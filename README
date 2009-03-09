@@ -16,7 +16,6 @@ Slice setup recipies
 Commonly used setup recipies. Check the source for more.
 
 Setup ssh, iptables and aptitude
-
 	cap slice:configure
 
 Setup mysql
