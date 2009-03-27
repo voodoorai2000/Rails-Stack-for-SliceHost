@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name     = "slicehost"
-  s.version  = "0.0.2.5"
+  s.version  = "0.0.2.6"
   s.date     = "2009-03-17"
   s.summary  = "Capistrano recipes for setting up and deploying to Slicehost"
   s.email    = "josh@joshpeek.com"
